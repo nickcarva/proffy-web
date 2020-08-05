@@ -4,9 +4,9 @@ import db from '../database/connection'
 import convertHourToMinute from '../utils/convertHourToMinutes'
 
 interface ScheduleItem {
-    week_day: number;
-    from: string;
-    to: string;
+    week_day: number
+    from: string
+    to: string
 }
 
 export default class ClassesController {

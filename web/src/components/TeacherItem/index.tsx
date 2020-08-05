@@ -1,38 +1,57 @@
 import React from 'react'
 
+import api from '../../services/api'
+
 import whatsAppIcon from '../../assets/images/icons/whatsapp.svg'
 
 import './styles.css'
 
-function TeacherItem () {
+export interface Teacher {
+    id: number
+    name: string
+    avatar: string
+    bio: string
+    cost: number
+    subject: string
+    whatsapp: string
+}
+
+interface TeacherItemProps {
+    teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+    function createNewConnection () {
+        api.post('connections', {
+            user_id: teacher.id
+        })
+    }
+
     return (
         <article className="teacher-item">
             <header>
-                <img
-                    src="https://avatars0.githubusercontent.com/u/45905851?s=460&u=13218927d578f0832684601d8e6cf734fa3590b1&v=4"
-                    alt="Nicolas Carvalho"
-                />
+                <img src={teacher.avatar} alt={teacher.name} />
+
                 <div>
-                    <strong>Nicolas Carvalho Avelaneda</strong>
-                    <span>Arqueologia</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                <br /><br />
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
+            <p>{teacher.bio}</p>
 
             <footer>
                 <p>
                     Preço/hora
-                    <strong>R$ 1,50</strong>
+                    <strong>R$ {teacher.cost}</strong>
                 </p>
-                <button type="button">
+                <a 
+                    href={`https://wa.me/${teacher.whatsapp}`}
+                    target="_blank" rel="noopener noreferrer"
+                    onClick={createNewConnection}>
                     <img src={whatsAppIcon} alt="Whats App"/>
                     Entrar em contato
-                </button>
+                </a>
             </footer>
         </article>
     )
