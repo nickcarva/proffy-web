@@ -50,8 +50,12 @@ function TeacherForm () {
         e.preventDefault()
 
         api.post('classes', {
-            name, avatar, whatsapp,
-            bio, subject, cost: Number(cost), 
+            name,
+            avatar,
+            whatsapp,
+            bio,
+            subject,
+            cost: Number(cost),
             schedule: scheduleItems
         }).then(() => {
             alert('Cadastro realizado com sucesso!')
@@ -73,19 +77,19 @@ function TeacherForm () {
                     <fieldset>
                         <legend>Seus dados</legend>
 
-                        <Input 
+                        <Input
                             name="name" label="Nome completo" value={name}
                             onChange={(e) => { setName(e.target.value) }} />
-                        
-                        <Input 
+
+                        <Input
                             name="avatar" label="Avatar (URL)" value={avatar}
                             onChange={(e) => { setAvatar(e.target.value) }} />
 
-                        <Input 
+                        <Input
                             name="whatsapp" label="WhatsApp" value={whatsapp}
                             onChange={(e) => { setWhatsapp(e.target.value) }} />
 
-                        <Textarea 
+                        <Textarea
                             name="bio" label="Biografia" value={bio}
                             onChange={(e) => { setBio(e.target.value) }} />
                     </fieldset>
@@ -110,7 +114,7 @@ function TeacherForm () {
                             ]}
                         />
 
-                        <Input 
+                        <Input
                             name="cost" label="Custo da sua hora por aula" value={cost}
                             onChange={(e) => { setCost(e.target.value) }} />
                     </fieldset>
@@ -122,7 +126,7 @@ function TeacherForm () {
                                 + Novo horário
                             </button>
                         </legend>
-                        
+
                         {scheduleItems.map((scheduleItem, index) => {
                             return (
                                 <div key={scheduleItem.week_day} className="schedule-item">
@@ -141,11 +145,11 @@ function TeacherForm () {
                                             { value: '6', label: 'Sábado' }
                                         ]}
                                     />
-                                    <Input 
+                                    <Input
                                         name="from" label="Das" type="time"
                                         value={scheduleItem.from}
                                         onChange={e => setScheduleItemValue(index, 'from', e.target.value)} />
-                                    <Input 
+                                    <Input
                                         name="to" label="Até" type="time"
                                         value={scheduleItem.to}
                                         onChange={e => setScheduleItemValue(index, 'to', e.target.value)} />
